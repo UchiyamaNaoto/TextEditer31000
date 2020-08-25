@@ -32,7 +32,7 @@
             this.sfdFileSave = new System.Windows.Forms.SaveFileDialog();
             this.rtTextArea = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.FileFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,9 +49,11 @@
             this.DeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.ColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.文字コードCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ヘルプHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.FontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cdColor = new System.Windows.Forms.ColorDialog();
+            this.fdFont = new System.Windows.Forms.FontDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +64,7 @@
             // rtTextArea
             // 
             this.rtTextArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtTextArea.EnableAutoDragDrop = true;
             this.rtTextArea.Location = new System.Drawing.Point(0, 24);
             this.rtTextArea.Name = "rtTextArea";
             this.rtTextArea.Size = new System.Drawing.Size(800, 426);
@@ -71,7 +74,7 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FileFToolStripMenuItem,
+            this.FileToolStripMenuItem,
             this.EditToolStripMenuItem,
             this.文字コードCToolStripMenuItem,
             this.ヘルプHToolStripMenuItem});
@@ -81,18 +84,18 @@
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // FileFToolStripMenuItem
+            // FileToolStripMenuItem
             // 
-            this.FileFToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NewToolStripMenuItem,
             this.OpenToolStripMenuItem,
             this.SaveToolStripMenuItem,
             this.SaveNameToolStripMenuItem,
             this.toolStripSeparator1,
             this.ExitToolStripMenuItem});
-            this.FileFToolStripMenuItem.Name = "FileFToolStripMenuItem";
-            this.FileFToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.FileFToolStripMenuItem.Text = "ファイル(&F)";
+            this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.FileToolStripMenuItem.Text = "ファイル(&F)";
             // 
             // NewToolStripMenuItem
             // 
@@ -100,6 +103,7 @@
             this.NewToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.NewToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.NewToolStripMenuItem.Text = "新規作成(&N)";
+            this.NewToolStripMenuItem.Click += new System.EventHandler(this.NewToolStripMenuItem_Click);
             // 
             // OpenToolStripMenuItem
             // 
@@ -153,6 +157,7 @@
             this.EditToolStripMenuItem.Name = "EditToolStripMenuItem";
             this.EditToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.EditToolStripMenuItem.Text = "編集(&E)";
+            this.EditToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // UndoToolStripMenuItem
             // 
@@ -160,6 +165,7 @@
             this.UndoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.UndoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.UndoToolStripMenuItem.Text = "元に戻す(&U)";
+            this.UndoToolStripMenuItem.Click += new System.EventHandler(this.UndoToolStripMenuItem_Click);
             // 
             // RedoToolStripMenuItem
             // 
@@ -167,6 +173,7 @@
             this.RedoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.RedoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.RedoToolStripMenuItem.Text = "やり直し(&R)";
+            this.RedoToolStripMenuItem.Click += new System.EventHandler(this.RedoToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -179,6 +186,7 @@
             this.CutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
             this.CutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.CutToolStripMenuItem.Text = "切り取り(&T)";
+            this.CutToolStripMenuItem.Click += new System.EventHandler(this.CutToolStripMenuItem_Click);
             // 
             // CopyToolStripMenuItem
             // 
@@ -186,6 +194,7 @@
             this.CopyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
             this.CopyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.CopyToolStripMenuItem.Text = "コピー(&C)";
+            this.CopyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
             // PasteToolStripMenuItem
             // 
@@ -193,6 +202,7 @@
             this.PasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
             this.PasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.PasteToolStripMenuItem.Text = "貼り付け(&P)";
+            this.PasteToolStripMenuItem.Click += new System.EventHandler(this.PasteToolStripMenuItem_Click);
             // 
             // DeleteToolStripMenuItem
             // 
@@ -212,6 +222,12 @@
             this.ColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ColorToolStripMenuItem.Text = "色...";
             // 
+            // FontToolStripMenuItem
+            // 
+            this.FontToolStripMenuItem.Name = "FontToolStripMenuItem";
+            this.FontToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.FontToolStripMenuItem.Text = "フォント...";
+            // 
             // 文字コードCToolStripMenuItem
             // 
             this.文字コードCToolStripMenuItem.Name = "文字コードCToolStripMenuItem";
@@ -224,12 +240,6 @@
             this.ヘルプHToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.ヘルプHToolStripMenuItem.Text = "ヘルプ(&H)";
             // 
-            // FontToolStripMenuItem
-            // 
-            this.FontToolStripMenuItem.Name = "FontToolStripMenuItem";
-            this.FontToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.FontToolStripMenuItem.Text = "フォント...";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -240,6 +250,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "テキストエディタ";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -253,7 +264,7 @@
         private System.Windows.Forms.SaveFileDialog sfdFileSave;
         private System.Windows.Forms.RichTextBox rtTextArea;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem FileFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem NewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
@@ -273,6 +284,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem ColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem FontToolStripMenuItem;
+        private System.Windows.Forms.ColorDialog cdColor;
+        private System.Windows.Forms.FontDialog fdFont;
     }
 }
 
